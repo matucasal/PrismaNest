@@ -8,6 +8,7 @@ import {
   Delete,
 } from '@nestjs/common';
 import { PostService } from './post.service';
+import { CreatePostDto } from './dto/create-post.dto';
 import { Post as PostModel } from '@prisma/client';
 
 @Controller()
@@ -48,9 +49,9 @@ export class PostController {
 
   @Post('post')
   async createDraft(
-    @Body() postData: { title: string; content?: string; authorEmail: string },
+    @Body() createPostDto: CreatePostDto,
   ): Promise<PostModel> {
-    const { title, content, authorEmail } = postData;
+    const { title, content, authorEmail } = createPostDto;
     return this.postService.createPost({
       title,
       content,
