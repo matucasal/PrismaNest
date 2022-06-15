@@ -7,6 +7,51 @@
 	},
 	"item": [
 		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.environment.set(\"jwt_token\", response.access_token);\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"matucasal\",\r\n    \"password\": \"pepe\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Feed Posts",
 			"request": {
 				"method": "GET",
@@ -32,7 +77,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"test2\",\r\n    \"content\": \"content test2\",\r\n    \"authorEmail\": \"test@test.com\"\r\n}",
+					"raw": "{\r\n    \"title\": \"test4\",\r\n    \"content\": \"content test4\",\r\n    \"authorEmail\": \"test11@test9.com\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -66,7 +111,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"userTest\",\r\n    \"email\": \"test@test.com\"\r\n}",
+					"raw": "{\r\n    \"name\": \"userTest6\",\r\n    \"email\": \"test11@test9.com\",\r\n    \"password\": \"pepe\",\r\n    \"username\": \"matucasal\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -106,6 +151,63 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Profile",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/profile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profile"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{jwt_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "jwt_token",
+			"value": "",
+			"type": "string",
+			"disabled": true
 		}
 	]
 }
