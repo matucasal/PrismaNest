@@ -11,7 +11,7 @@ export class AppService {
     return 'Hello from Matucasal Repo!';
   }
   root(): string {
-    Logger.log('App is running');
+    Logger.log('App is running test');
     return 'OK';
   }
 
