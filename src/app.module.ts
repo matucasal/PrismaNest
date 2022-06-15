@@ -3,7 +3,6 @@ import { AppController } from './app.controller';
 import {UserModule} from './modules/users/user.module';
 import {PostModule} from './modules/posts/post.module'
 import {AppService} from './app.service'
-import {PrismaService} from './prisma.service';
 
 @Module({
   imports: [UserModule,PostModule ],
