@@ -23,6 +23,15 @@ export class CreateUserDto {
   @IsString()
   name: string;
 
+
+  @ApiProperty(
+    {required: true}
+  )
+  @IsNotEmpty()
+  @IsString()
+  username: string;
+
+
   
   @ApiProperty({
     required: false,
