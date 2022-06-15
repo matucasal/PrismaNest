@@ -1,6 +1,4 @@
-## providers
 
-Don't forget to add providers to app.module !!
 
 
 ## Installation
@@ -22,7 +20,7 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Test
+## Test (Todavía no)
 
 ```bash
 # unit tests
