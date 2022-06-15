@@ -7,14 +7,12 @@ import {
   Put,
   Delete,
 } from '@nestjs/common';
-import { UserService } from './user.service';
-import { PostService } from './post.service';
-import { User as UserModel, Post as PostModel } from '@prisma/client';
+import { PostService } from '../services/post.service';
+import { Post as PostModel } from '@prisma/client';
 
 @Controller()
 export class AppController {
   constructor(
-    private readonly userService: UserService,
     private readonly postService: PostService,
   ) {}
 
@@ -62,12 +60,6 @@ export class AppController {
     });
   }
 
-  @Post('user')
-  async signupUser(
-    @Body() userData: { name?: string; email: string },
-  ): Promise<UserModel> {
-    return this.userService.createUser(userData);
-  }
 
   @Put('publish/:id')
   async publishPost(@Param('id') id: string): Promise<PostModel> {
