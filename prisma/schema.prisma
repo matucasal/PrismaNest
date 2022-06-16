@@ -28,8 +28,8 @@ model Post {
   title     String
   content   String?
   published Boolean? @default(false)
-  author    User?    @relation(fields: [authorId], references: [id])
-  authorId  Int?
+  user    User?    @relation(fields: [owner], references: [id])
+  owner  Int?
 }
 
 

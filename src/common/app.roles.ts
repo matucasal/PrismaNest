@@ -9,10 +9,11 @@ export const roles: RolesBuilder = new RolesBuilder();
 
 roles
   .grant(AppRoles.USER) // USER can only create or delete own posts. Can read every post
-    .createOwn('post') 
+    .createAny('post') 
+    .updateOwn('post') 
     .deleteOwn('post')
     .readAny('post')
   .grant(AppRoles.ADMIN) // ADMIN Role declaration
     .extend(AppRoles.USER) // inherit role capabilities. also takes an array
-    .updateAny('post', ['title']) // Can delete or update any post
+    .updateAny('post') 
     .deleteAny('post');

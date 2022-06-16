@@ -25,7 +25,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     
     // Make a new user payload with roles []
     const userPayload =  { userId: user.id, username: user.username, roles:[user.role] };
-
+    console.log('userPayload', userPayload)
     done(null, userPayload);
     return true;
   }
