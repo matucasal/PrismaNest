@@ -5,8 +5,10 @@ generator client {
   provider = "prisma-client-js"
 }
 
+//prisma_nest / mcasal / noFUMAR8
+
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -17,6 +19,7 @@ model User {
   username String  @unique
   name  String?
   password String?
+  role  Role  @default(USER)
   posts Post[]
 }
 
@@ -27,4 +30,10 @@ model Post {
   published Boolean? @default(false)
   author    User?    @relation(fields: [authorId], references: [id])
   authorId  Int?
+}
+
+
+enum Role {
+  USER
+  ADMIN
 }
