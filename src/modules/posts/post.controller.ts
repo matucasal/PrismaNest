@@ -12,13 +12,11 @@ import { PostService } from './post.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { Post as PostModel } from '@prisma/client';
-import { ACGuard, UseRoles,RolesBuilder, InjectRolesBuilder } from 'nest-access-control';
 
 @Controller()
 export class PostController {
   constructor(
     private readonly postService: PostService,
-    @InjectRolesBuilder() private readonly roleBuilder: RolesBuilder
   ) {}
 
   @UseGuards(JwtAuthGuard)
@@ -55,12 +53,7 @@ export class PostController {
   }
 
   @Post('post')
-  @UseGuards(JwtAuthGuard, ACGuard)
-  @UseRoles({
-    resource: 'post',
-    action: 'create',
-    possession: 'own',
-  })
+  @UseGuards(JwtAuthGuard)
   async createDraft(
     @Body() createPostDto: CreatePostDto,
   ): Promise<PostModel> {
@@ -75,12 +68,7 @@ export class PostController {
   }
 
   @Put('publish/:id')
-  @UseGuards(JwtAuthGuard, ACGuard)
-  @UseRoles({
-    resource: 'post',
-    action: 'update',
-    possession: 'any'
-  })
+  @UseGuards(JwtAuthGuard)
   async publishPost(@Param('id') id: string): Promise<PostModel> {
     return this.postService.updatePost({
       where: { id: Number(id) },
@@ -89,12 +77,7 @@ export class PostController {
   }
 
   @Delete('post/:id')
-  @UseGuards(JwtAuthGuard, ACGuard)
-  @UseRoles({
-    resource: 'post',
-    action: 'delete',
-    possession: 'own',
-  })
+  @UseGuards(JwtAuthGuard)
   async deletePost(@Param('id') id: string): Promise<PostModel> {
     return this.postService.deletePost({ id: Number(id) });
   }
