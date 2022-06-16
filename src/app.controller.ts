@@ -3,6 +3,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { AppService } from './app.service';
 import { AuthService } from './modules/auth/auth.service';
 import { JwtAuthGuard } from './modules/auth/jwt-auth.guard';
+import { ACGuard, UseRoles } from 'nest-access-control';
 
 @Controller()
 export class AppController {
@@ -34,4 +35,15 @@ export class AppController {
     return req.user;
   }
 
+
+  @Get('roles')
+  @UseGuards(JwtAuthGuard, ACGuard)
+  @UseRoles({
+    resource: 'post',
+    action: 'read',
+    possession: 'any',
+  })
+  roles(@Request() req) {
+    return 'test roles';
+  }
 }
