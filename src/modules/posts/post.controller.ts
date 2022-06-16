@@ -12,6 +12,9 @@ import { PostService } from './post.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { JwtAuthGuard } from '../../guards/jwt-auth.guard';
 import { Post as PostModel } from '@prisma/client';
+import { Roles } from '../../decorators/roles.decorator';
+import {RolesGuard} from '../../guards/roles.guard';
+import {Role} from '../../enums/role.enum'
 
 @Controller()
 export class PostController {
@@ -77,8 +80,11 @@ export class PostController {
   }
 
   @Delete('post/:id')
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard,RolesGuard)
+  @Roles(Role.ADMIN)
   async deletePost(@Param('id') id: string): Promise<PostModel> {
+    console.log('id deleted', id)
     return this.postService.deletePost({ id: Number(id) });
+    
   }
 }

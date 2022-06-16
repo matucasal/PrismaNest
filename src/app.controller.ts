@@ -22,7 +22,7 @@ export class AppController {
 
   @Get('/diagnostic/echo')
   echo(): string {
-    return 'echo';
+    return 'echo 2';
   }
 
   @UseGuards(LocalAuthGuard)
@@ -42,6 +42,6 @@ export class AppController {
   @UseGuards(JwtAuthGuard,RolesGuard)
   @Roles(Role.ADMIN)
   roles(@Request() req) {
-    return 'test roles';
+    return 'test roles new';
   }
 }
