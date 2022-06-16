@@ -12,7 +12,9 @@ import { AuthModule } from './modules/auth/auth.module';
   imports: [UserModule,PostModule, AuthModule],
   controllers: [AppController],
   //If using provider, not forget to add them here
-  providers: [AppService],
+  providers: [
+    AppService, 
+  ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

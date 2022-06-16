@@ -1,8 +1,11 @@
 import { Controller, Request, Post, UseGuards, Get } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
+import { LocalAuthGuard } from './guards/local-auth.guard';
 import { AppService } from './app.service';
 import { AuthService } from './modules/auth/auth.service';
-import { JwtAuthGuard } from './modules/auth/jwt-auth.guard';
+import { JwtAuthGuard } from './guards/jwt-auth.guard';
+import { Roles } from './decorators/roles.decorator';
+import {RolesGuard} from './guards/roles.guard';
+import {Role} from './enums/role.enum'
 
 @Controller()
 export class AppController {
@@ -22,13 +25,13 @@ export class AppController {
     return 'echo';
   }
 
-  @UseGuards(AuthGuard('local'))
+  @UseGuards(LocalAuthGuard)
   @Post('auth/login')
   async login(@Request() req) {
     return this.authService.login(req.user);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard )
   @Get('profile')
   getProfile(@Request() req) {
     return req.user;
@@ -36,7 +39,8 @@ export class AppController {
 
 
   @Get('roles')
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard,RolesGuard)
+  @Roles(Role.ADMIN)
   roles(@Request() req) {
     return 'test roles';
   }
