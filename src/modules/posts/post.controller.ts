@@ -79,7 +79,7 @@ export class PostController {
   @UseRoles({
     resource: 'post',
     action: 'update',
-    possession: 'own',
+    possession: 'any'
   })
   async publishPost(@Param('id') id: string): Promise<PostModel> {
     return this.postService.updatePost({
