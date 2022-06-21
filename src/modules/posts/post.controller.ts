@@ -6,7 +6,8 @@ import {
   Body,
   Put,
   Delete,
-  UseGuards
+  UseGuards,
+  Request
 } from '@nestjs/common';
 import { PostService } from './post.service';
 import { CreatePostDto } from './dto/create-post.dto';
@@ -60,12 +61,13 @@ export class PostController {
   async createDraft(
     @Body() createPostDto: CreatePostDto,
   ): Promise<PostModel> {
-    const { title, content, authorEmail } = createPostDto;
+    const { title, content, userId } = createPostDto;
     return this.postService.createPost({
       title,
       content,
+      //owner: req.user.id
       user: {
-        connect: { email: authorEmail },
+        connect: { id: Number(userId) },
       },
     });
   }

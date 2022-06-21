@@ -28,12 +28,12 @@ export class CreatePostDto {
 
 
 
-  @ApiProperty({
-    required: true,
-  })
-  @IsEmail()
+  @ApiProperty(
+    {required: true}
+  )
   @IsNotEmpty()
-  authorEmail: string;
+  userId: number;
+
 
 
 }

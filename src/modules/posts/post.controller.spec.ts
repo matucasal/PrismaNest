@@ -43,7 +43,7 @@ describe ('PostController', () => {
     it('should call service to create a draft with a mock ', async () => {
       
       //Expecting to be equal to the generated mock (using  "simulated" service) -> https://github.com/jmcdo29/testing-nestjs/blob/main/apps/prisma-sample/src/cat/cat.controller.spec.ts
-      expect(await controller.createDraft({ title: 'title', content: 'content', authorEmail: 'testx@testx.com'}))
+      expect(await controller.createDraft({ title: 'title', content: 'content', userId: 1}))
       .toEqual(
         {"id": expect.any(Number),
         "title": "title",

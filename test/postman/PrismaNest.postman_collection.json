@@ -29,7 +29,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"matucasal\",\r\n    \"password\": \"pepe\"\r\n}",
+					"raw": "{\r\n    \"username\": \"matucasal\",\r\n    \"password\": \"pepePEPE123!\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -111,7 +111,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"userTest6\",\r\n    \"email\": \"test11@test9.com\",\r\n    \"password\": \"pepe\",\r\n    \"username\": \"matucasal\"\r\n}",
+					"raw": "{\r\n    \"name\": \"userTest6\",\r\n    \"email\": \"testx@testx.com\",\r\n    \"password\": \"pepePEPE123!\",\r\n    \"username\": \"matucasal\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -153,6 +153,26 @@
 			"response": []
 		},
 		{
+			"name": "Delete Post",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/publish/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"publish",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Profile",
 			"request": {
 				"method": "GET",
@@ -168,6 +188,33 @@
 						"profile"
 					]
 				}
+			},
+			"response": []
+		},
+		{
+			"name": "get roles",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/roles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"roles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/diagnostic/echo",
+			"request": {
+				"method": "GET",
+				"header": []
 			},
 			"response": []
 		}
