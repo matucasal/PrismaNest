@@ -28,6 +28,7 @@ export class PostService {
       cursor,
       where,
       orderBy,
+      include: {user: true},
     });
   }
 
