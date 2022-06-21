@@ -3,15 +3,29 @@ import { INestApplication, HttpStatus } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
 import { JwtAuthGuard } from '../src/guards/jwt-auth.guard';
+import { PostModule } from '../src/modules/posts/post.module';
+import { PostService } from '../src/modules/posts/post.service';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
   let authToken: JwtAuthGuard;
+  let postService = { posts: () => [
+    {
+    "id": 19,
+    "title": "title",
+    "content": "content",
+    "published": true,
+    "owner": 1
+    }
+  ] };
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
-    }).compile();
+      imports: [AppModule, PostModule],
+    })
+    .overrideProvider(PostService)
+    .useValue(postService)
+    .compile();
 
     app = moduleFixture.createNestApplication();
     await app.init();
@@ -48,6 +62,16 @@ describe('AppController (e2e)', () => {
         // add assertions that reflect your test data
         // expect(data).toHaveLength(3) 
       })
+
+      it(`/Feed posts`, async () => {
+        const response = await request(app.getHttpServer())
+          .get('/feed')
+          .set('Authorization', `Bearer ${jwtToken}`)
+          .expect(200)
+          .expect(postService.posts());
+
+          const data = response.body.data
+      });
     })
   })
 
